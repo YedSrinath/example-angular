@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Angular</title>
+  <link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body ng-app="app">
+  <div id="app">
+  <div id="todos-wrapper" ng-controller="TodosCtrl as tc" class="ng-cloak">
+    <header>
+      <h1>Todos</h1>
+    </header>
+    <section id="main">
+      <form ng-submit="tc.create()">
+        <input
+          id="item-input"
+          type="text"
+          placeholder="What needs to be done?"
+          ng-model="tc.newTodo.name"
+          autofocus />
+      </form>
+      <ul id="todo-list">
+        <li
+          class="todo-item"
+          ng-repeat="todo in tc.todos | filter:tc.newTodo.name | filter:tc.filter"
+          ng-class="{complete: todo.completed, active: todo == tc.activeTodo}">
+          <div class="view">
+            <input class="toggle" type="checkbox" ng-model="todo.completed" />
+            <label ng-dblclick="tc.editTodo(todo)">{{ todo.name }}</label>
+            <button class="remove" type="button" ng-click="tc.remove($index)"><i class="fa fa-trash"></i></button>
+          </div>
+          <form ng-submit="tc.update(todo)">
+            <input
+              class="edit"
+              type="text"
+              ng-model="todo.name"
+              ng-blur="tc.update(todo)"
+              todo-focus="todo == tc.activeTodo"
+              todo-escape="tc.revert($index)"
+              autofocus />
+          </form>
+        </li>
+      </ul>
+    </section>
+
+    <footer>
+      <button ng-click="tc.show('active')">Active</button>
+      <button ng-click="tc.show('completed')">Completed</button>
+    </footer>
+  </div>
+
+  <div id="temp-wrapper" ng-controller="TempCtrl as tc" class="ng-cloak">
+    <header>
+      <h1>Temperatures</h1>
+    </header>
+    <section id="main">
+      <form ng-submit="tc.create()">
+        <input
+          id="item-input"
+          type="text"
+          placeholder="Whats the temperature?"
+          ng-model="tc.temp"
+          autofocus />
+      </form>
+      <ul id="temp-list">
+        <li
+          class="todo-item"
+          ng-repeat="temp in tc.temperatures">
+          <div class="view">
+            <label>{{ temp }}</label>
+          </div>
+        </li>
+      </ul>
+      <button type="button" ng-click="tc.median()">Get Median</button>
+      <p ng-if="tc.medianVal">Median of temperatures: {{ tc.medianVal }}</p>
+    </section>
+  </div>
+  </div>
+  <!-- bower:js -->
+  <script src="/bower_components/angular/angular.js"></script>
+  <script src="/bower_components/angular-animate/angular-animate.js"></script>
+  <!-- endbower -->
+
+  <script src="/scripts/todos.js"></script>
+  <script src="/scripts/temperature.js"></script>
+  <script src="/scripts/app.js"></script>
+</body>
+</html>
