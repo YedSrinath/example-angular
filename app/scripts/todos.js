@@ -3,7 +3,17 @@ angular
   .controller('TodosCtrl', TodosCtrl)
   .factory('Todos', Todos)
   .directive('todoFocus', todoFocus)
-  .directive('todoEscape', todoEscape);
+  .directive('todoEscape', todoEscape)
+  .directive('todos', todos);
+
+function todos() {
+  return {
+    restrict: 'E',
+    templateUrl: './scripts/templates/todos.html',
+    controller: 'TodosCtrl',
+    controllerAs: 'tc'
+  };
+}
 
 function todoFocus($timeout) {
   return function todoFocusLink(scope, elem, attrs) {

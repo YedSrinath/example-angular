@@ -1,7 +1,17 @@
 angular
   .module('temperature', ['ngAnimate'])
-  .controller('TempCtrl', TempCtrl);
+  .controller('TempCtrl', TempCtrl)
+  .directive('temp', temp);
 
+
+  function temp() {
+    return {
+      restrict: 'E',
+      templateUrl: './scripts/templates/temperature.html',
+      controller: 'TempCtrl',
+      controllerAs: 'tc'
+    };
+  }
 
   function mergeSort(arr) {
     if (arr.length < 2)
