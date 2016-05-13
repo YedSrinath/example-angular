@@ -56,15 +56,26 @@ angular
     }
   }
 
-function TempCtrl() {
+function TempCtrl($http) {
   var vm = this;
 
   vm.temp = null;
   vm.medianVal = null;
   vm.temperatures = [];
+  vm.github_name = null;
 
   vm.create = create;
   vm.median = median;
+
+  $http({
+    type: 'GET',
+    url: 'http://api.github.com/users/whoisandie'
+  }).then(function(res) {
+    //console.log(res.data.name);
+    vm.github_name = res.data.name;
+  }, function() {
+    console.log(err);
+  });
 
   function reset() {
     vm.temp = '';
