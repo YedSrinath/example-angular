@@ -20,6 +20,27 @@ body {
   display: none;
 }
 
+.page-holder {
+  position: relative;
+  display: block;
+}
+
+.page {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.page.ng-enter {
+  animation: fadeInLeft 300ms ease-in-out;
+}
+.page.ng-leave {
+  animation: fadeOutRight 300ms ease-in-out;
+}
+
 #route {
   text-align: left;
 }

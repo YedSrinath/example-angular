@@ -4,16 +4,20 @@
   <base href="#">
   <meta charset="UTF-8">
   <title>Project Angular</title>
+  <link rel="stylesheet" href="/bower_components/animate.css/animate.min.css" />
   <link rel="stylesheet" href="/styles/styles.css">
 </head>
 <body ng-app="app">
   <div id="app">
     <section id="route">
       <ul>
-        <li><a href="#/todos">Todos</a></li>
+        <li><a href="#/">Todos</a></li>
         <li><a href="#/temp">Temperature</a></li>
+        <li><a href="#/github">Github</a></li>
       </ul>
-      <ng-view></ng-view>
+      <div class="page-holder">
+        <ng-view class="page"></ng-view>
+      </div>
     </section>
   </div>
   <!-- bower:js -->
@@ -24,6 +28,7 @@
 
   <script src="/scripts/todos.js"></script>
   <script src="/scripts/temperature.js"></script>
+  <script src="/scripts/github.js"></script>
   <script src="/scripts/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,29 @@
+<div id="github-wrapper" class="ng-cloak">
+  <form ng-submit="github.getUserData()">
+    <input type="text" ng-model="github.what" placeholder="What is the username?" />
+  </form>
+  <p ng-if="github.userRequest">Loading...</p>
+  <div class="user" ng-if="github.user && !github.userRequest">
+    <div class="user-info">
+      <h3>{{ github.user.name }}</h3>
+      <p>{{ github.user.location }}</p>
+      <p ng-if="github.user.blog"><a href="#" target="_blank">{{ github.user.blog }}</a></p>
+    </div>
+
+    <div class="user-repos">
+      <p><strong>Repositories: </strong> {{ github.user.public_repos }}</p>
+      <p><strong>Followers: </strong> {{ github.user.followers }}</p>
+      <p><strong>Following: </strong> {{ github.user.following }}</p>
+      <p><button ng-click="github.getUserRepos()">Get User Repositories</button></p>
+    </div>
+  </div>
+  <div class="repositories" ng-if="github.repos">
+    <ul>
+      <li ng-repeat="repo in github.repos track by $index">
+        <div class="repo-info">
+          <a href="{{ repo.clone_url }}" target="_blank">{{ repo.name }}</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
