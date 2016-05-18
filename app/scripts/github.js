@@ -5,7 +5,7 @@ angular.module('github', ['ngAnimate'])
   .directive('github', Github);
 
 
-var REPO_LIMIT = 5;
+var REPO_LIMIT = 4;
 
 function FadeIn($animate) {
   return {
@@ -49,7 +49,7 @@ function GithubCtrl(GithubService) {
   var vm = this;
 
   vm.what = '';
-  vm.info = null;
+  vm.info = {};
   vm.loading= false;
   vm.getInfo = getInfo;
 
@@ -57,18 +57,18 @@ function GithubCtrl(GithubService) {
     vm.loading = true;
     if(!vm.what) return;
     GithubService.info(vm.what).then(function(res) {
-      var user = res[0];
+      var user = res[0].data;
       var repos = res[1].data.filter(function(i) {
         return i.stargazers_count;
       }).sort(function(a, b) {
         return a.stargazers_count-b.stargazers_count;
       }).reverse().slice(0, REPO_LIMIT);
 
+      vm.loading = false;
       vm.info = {
         user: user,
         repos: repos
       };
-      console.log(vm.info);
     });
   }
 }

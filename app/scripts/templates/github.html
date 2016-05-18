@@ -16,26 +16,26 @@
     <div class="loader" ng-if="github.loading">
       <p class="text-center">Loading...</p>
     </div>
-    <div class="user" ng-if="github.info && !github.loading">
+    <div class="user" ng-if="github.info.user && !github.loading">
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-12 col-md-5 col-lg-5">
             <div class="user-info">
               <div class="user-profile-image">
-                <img ng-src="{{ github.info.avatar_url }}" alt="{{ github.info.name }}" fade-in />
+                <img ng-src="{{ github.info.user.avatar_url }}" alt="{{ github.info.user.name }}" fade-in />
               </div>
               <div class="user-profile-info">
-                <h3>@{{ github.user.login }}</h3>
-                <p>{{ github.user.location }}</p>
-                <p ng-if="github.info.blog"><a href="#" target="_blank">{{ github.info.blog }}</a></p>
-                <p><strong>Repositories: </strong> {{ github.info.public_repos }}</p>
-                <p><strong>Followers: </strong> {{ github.info.followers }}</p>
-                <p><strong>Following: </strong> {{ github.info.following }}</p>
+                <h3>@{{ github.info.user.login }}</h3>
+                <p>{{ github.info.user.location }}</p>
+                <p ng-if="github.info.blog"><a href="#" target="_blank">{{ github.info.user.blog }}</a></p>
+                <p><strong>Repositories: </strong> {{ github.info.user.public_repos }}</p>
+                <p><strong>Followers: </strong> {{ github.info.user.followers }}</p>
+                <p><strong>Following: </strong> {{ github.info.user.following }}</p>
               </div>
             </div>
           </div>
           <div class="col-sm-12 col-md-7 col-lg-7">
-            <div class="user-repos">
+            <div class="user-repos" ng-if="github.info.repos.length">
               <h3>Repositories</h3>
               <ul>
                 <li ng-repeat="repo in github.info.repos">
