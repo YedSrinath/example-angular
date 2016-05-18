@@ -19,7 +19,7 @@
         <div class="view">
           <input class="toggle" type="checkbox" ng-model="todo.completed" />
           <label ng-dblclick="tc.editTodo(todo)">{{ todo.name }}</label>
-          <button class="remove" type="button" ng-click="tc.remove($index)"><i class="fa fa-trash"></i></button>
+          <button class="remove" type="button" ng-click="tc.remove($index)"></button>
         </div>
         <form ng-submit="tc.update(todo)">
           <input

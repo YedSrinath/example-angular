@@ -47,7 +47,6 @@ angular
 
   function getMedian(arr) {
     var sorted = mergeSort(arr);
-    debugger;
     var pivot = Math.floor(sorted.length/2);
     if (sorted.length%2 !== 0) {
       return sorted[pivot];

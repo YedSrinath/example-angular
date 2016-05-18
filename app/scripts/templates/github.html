@@ -1,29 +1,51 @@
 <div id="github-wrapper" class="ng-cloak">
-  <form ng-submit="github.getUserData()">
-    <input type="text" ng-model="github.what" placeholder="What is the username?" />
-  </form>
-  <p ng-if="github.userRequest">Loading...</p>
-  <div class="user" ng-if="github.user && !github.userRequest">
-    <div class="user-info">
-      <h3>{{ github.user.name }}</h3>
-      <p>{{ github.user.location }}</p>
-      <p ng-if="github.user.blog"><a href="#" target="_blank">{{ github.user.blog }}</a></p>
-    </div>
-
-    <div class="user-repos">
-      <p><strong>Repositories: </strong> {{ github.user.public_repos }}</p>
-      <p><strong>Followers: </strong> {{ github.user.followers }}</p>
-      <p><strong>Following: </strong> {{ github.user.following }}</p>
-      <p><button ng-click="github.getUserRepos()">Get User Repositories</button></p>
-    </div>
+  <header>
+    <h1>Github Card</h1>
+  </header>
+  <div class="container-fluid">
+    <form ng-submit="github.getInfo()">
+      <input
+        id="user-input"
+        type="text"
+        ng-model="github.what"
+        placeholder="What is the username?" 
+        autofocus />
+    </form>
   </div>
-  <div class="repositories" ng-if="github.repos">
-    <ul>
-      <li ng-repeat="repo in github.repos track by $index">
-        <div class="repo-info">
-          <a href="{{ repo.clone_url }}" target="_blank">{{ repo.name }}</a>
+  <div class="user-content-holder">
+    <div class="loader" ng-if="github.loading">
+      <p class="text-center">Loading...</p>
+    </div>
+    <div class="user" ng-if="github.info && !github.loading">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 col-md-5 col-lg-5">
+            <div class="user-info">
+              <div class="user-profile-image">
+                <img ng-src="{{ github.info.avatar_url }}" alt="{{ github.info.name }}" fade-in />
+              </div>
+              <div class="user-profile-info">
+                <h3>@{{ github.user.login }}</h3>
+                <p>{{ github.user.location }}</p>
+                <p ng-if="github.info.blog"><a href="#" target="_blank">{{ github.info.blog }}</a></p>
+                <p><strong>Repositories: </strong> {{ github.info.public_repos }}</p>
+                <p><strong>Followers: </strong> {{ github.info.followers }}</p>
+                <p><strong>Following: </strong> {{ github.info.following }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-7 col-lg-7">
+            <div class="user-repos">
+              <h3>Repositories</h3>
+              <ul>
+                <li ng-repeat="repo in github.info.repos">
+                  {{ repo.name }} | <span>{{ repo.stargazers_count }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </div>
